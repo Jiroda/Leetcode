@@ -1,3 +1,6 @@
+//T:O(n)
+//S:O(1)
+
 class Solution {
     public int myAtoi(String s) {
         s = s.trim();
