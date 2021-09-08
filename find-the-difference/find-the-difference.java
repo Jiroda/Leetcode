@@ -1,3 +1,6 @@
+//T:O(length of s + length of t)
+//S:O(length of s + 1)
+
 class Solution {
     public char findTheDifference(String s, String t) {
         HashMap<Character, Integer> map = new HashMap<>();
