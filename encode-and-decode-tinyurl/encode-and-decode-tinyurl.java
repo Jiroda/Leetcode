@@ -1,3 +1,6 @@
+//T:O(1)
+//S:O(n)
+
 public class Codec {
     private static final String alphabets = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     HashMap<String, String> urlToCodeMap = new HashMap<>();
