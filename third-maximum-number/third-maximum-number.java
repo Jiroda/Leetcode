@@ -1,3 +1,6 @@
+//T:O(n)
+//S:O(1)
+
 public class Solution {
     public int thirdMax(int[] nums) {
        PriorityQueue<Integer> pq = new PriorityQueue<>();
