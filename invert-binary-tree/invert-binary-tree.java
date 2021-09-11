@@ -28,9 +28,12 @@ class Solution {
         queue.add(root);
         while (!queue.isEmpty()) {
             TreeNode current = queue.poll();
+            
+            //swap using temp treenode
             TreeNode temp = current.left;
             current.left = current.right;
             current.right = temp;
+            
             if (current.left != null) queue.add(current.left);
             if (current.right != null) queue.add(current.right);
         }
