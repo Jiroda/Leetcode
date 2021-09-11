@@ -1,18 +1,6 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
+//T:next() is O(n) in worst case, however its amortized O(1), hasNext() is O(1)
+//S:O(n)
+
 class BSTIterator {
     Stack<TreeNode> stack;
     public BSTIterator(TreeNode root) {
