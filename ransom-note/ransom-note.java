@@ -1,3 +1,6 @@
+//T:O(m) length of magazine is >= length of the ransomNote
+//S:O(1)
+
 class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
         int[] alphabets = new int[26];
