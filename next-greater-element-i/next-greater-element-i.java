@@ -1,3 +1,6 @@
+//T:O(nums1.length + nums2.length)
+//S:O(nums1.length + nums2.length)
+
 class Solution {
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         Map<Integer, Integer> map = new HashMap<>();
