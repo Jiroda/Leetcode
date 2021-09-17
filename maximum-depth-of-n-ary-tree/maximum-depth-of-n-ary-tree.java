@@ -1,3 +1,5 @@
+//Time complexity: O(n)
+//Space Complexity: O(n)
 
 class Solution {
     public int maxDepth(Node root) {
@@ -9,14 +11,12 @@ class Solution {
         if(root==null){
             return 0;
         }
-        //already height is 1 if node is not null
-        int maxDepth = 1;
-        
+        int maxDepth = 0;
         List<Node> children = root.children;
         for(Node child : children){
-            maxDepth = Math.max(maxDepth, 1+ helper(child));
+            maxDepth = Math.max(maxDepth, helper(child));
         }
         
-        return maxDepth;
+        return maxDepth+1; //+1 is to included the current node on which the recursion is run
     }
 }
