@@ -1,38 +1,28 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
 class Solution {
-    public int deepestLeavesSum(TreeNode root) {
-        Queue<TreeNode> q = new LinkedList<>();
-        q.offer(root);
-        int ans = 0;
-        while(!q.isEmpty()){
-            int levelSum = 0;
-            int size = q.size();
-            for(int i=0; i<size; i++){
-                TreeNode node = q.poll();
-                levelSum+=node.val;
-                if(node.left!=null){
-                    q.offer(node.left);
-                }
-                if(node.right!=null){
-                    q.offer(node.right);
-                }
-            }
-            ans = levelSum;
-        }
-        return ans;
+  private int sum = 0;
+  private int height = 0;
+
+  public int maxDepth(TreeNode root) {
+    if(root == null)
+    return 0;
+    return (1 + Math.max(maxDepth(root.left), maxDepth(root.right)));
+  }
+
+  public int deepestLeavesSum(TreeNode root) {
+    height = maxDepth(root);
+    return deepestSum(root, 1);
+  }
+
+  public int deepestSum(TreeNode node, int level) {
+    if (node == null)
+    return 0;
+    if(node.left == null && node.right == null && level == height) {
+    sum = sum + node.val;
+    return sum;
     }
+    int left = deepestSum(node.left, level+1);
+    int right = deepestSum(node.right, level+1);
+
+    return sum;
+  }
 }
