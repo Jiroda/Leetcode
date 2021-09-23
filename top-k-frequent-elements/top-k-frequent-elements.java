@@ -1,3 +1,6 @@
+//T:O(nlogK)
+//S:O(n+k) ~ O(n) since n > k
+
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
         HashMap<Integer, Integer> map = new HashMap<>();
