@@ -1,3 +1,7 @@
+//T:O(V+E)
+//S:O(V+E)
+
+
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         HashMap<Integer, List<Integer>> map = new HashMap<>();
