@@ -11,11 +11,12 @@ public class Solution {
             //if slow and fast meet we know cycle exists
             if(slow==fast){
                 //inorder to find the entry point of the cycle move head and slow one by one till they meet
-                while(head!=slow){
-                    head = head.next;
+                slow = head;
+                while(slow!=fast){
                     slow = slow.next;
+                    fast = fast.next;
                 }
-                return head;
+                return slow;
             }
         }
         return null;
