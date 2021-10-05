@@ -12,11 +12,14 @@ class Solution {
             slopes = new HashMap<>();
             for (int j = i+1; j < p.size(); j++) {
                 Double slope = p.get(i).slope(p.get(j));
-                if (!slopes.containsKey(slope)) slopes.put(slope, 1); // set to one as we want to consider this point as well
-                
-                int val = slopes.get(slope);
-                max = Math.max(max, val+1);
-                slopes.put(slope, val+1);
+                if (!slopes.containsKey(slope)){
+                    slopes.put(slope, 1);
+                }
+                // set to one as we want to consider this point as well
+                //Inorder for us to enter a new slope into the map we need to default it to 1
+                int numberofPoints = slopes.get(slope);
+                max = Math.max(max, numberofPoints+1);
+                slopes.put(slope, numberofPoints+1);
             }
         }
         
