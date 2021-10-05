@@ -17,6 +17,9 @@ class Solution {
         return result;
     }
     
+    /* I use both memoization and visited array for backtracking although the new coordinate > previous coordinate  
+     * will eliminate the need to have a visited array as we wont go to a smaller value cell again
+     */
     private int dfs(int[][] matrix, int row, int col, int[][] cache, boolean[][] visited){
         //check cache
         if(cache[row][col]>0){
@@ -26,8 +29,8 @@ class Solution {
             return 0;
         }
         
+        //choose
         visited[row][col] = true;
-        
         int currentMaxLength =0; 
         
         //Check all 4 directions from current coordinate
@@ -42,8 +45,8 @@ class Solution {
         
         cache[row][col] = 1+ currentMaxLength;
         
+        //unchoose
         visited[row][col] = false;
-        
         return cache[row][col];
     }
     
