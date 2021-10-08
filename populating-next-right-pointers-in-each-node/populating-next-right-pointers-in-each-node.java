@@ -23,31 +23,27 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
+        //Base case
         if(root == null) return root;
-        
-        // node 1
+        // using 3 node pointers just to clearly explain the flow
         Node curr = root;
-        Node parent = root;
-        
-        // start at node 2
-        while(parent.left != null){
-            
-            curr = parent; 
+        Node prev;
+        Node nextLevel;
+        while(curr != null){
+            nextLevel = curr.left;
+            prev = null;
             while(curr != null){
-                
-                curr.left.next = curr.right;
-                
-                if(curr.next != null){
-                    curr.right.next = curr.next.left;
+                if(prev != null) {
+                    prev.next = curr.left;
                 }
+                if(curr.left != null){
+                    curr.left.next = curr.right;
+                }
+                prev = curr.right;
                 curr = curr.next;
             }
-            
-            parent = parent.left;
+            curr = nextLevel;
         }
-        
-        
         return root;
-        
     }
 }
