@@ -24,24 +24,30 @@ class Node {
 class Solution {
     public Node connect(Node root) {
         if(root == null) return root;
+        
+        // node 1
         Node curr = root;
-        Node prev;
-        Node nextLevel;
-        while(curr != null){
-            nextLevel = curr.left;
-            prev = null;
+        Node parent = root;
+        
+        // start at node 2
+        while(parent.left != null){
+            
+            curr = parent; 
             while(curr != null){
-                if(prev != null){
-                    prev.next = curr.left;
+                
+                curr.left.next = curr.right;
+                
+                if(curr.next != null){
+                    curr.right.next = curr.next.left;
                 }
-                if(curr.left != null) {
-                    curr.left.next = curr.right;
-                }
-                prev = curr.right;
                 curr = curr.next;
             }
-            curr = nextLevel;
+            
+            parent = parent.left;
         }
+        
+        
         return root;
+        
     }
 }
