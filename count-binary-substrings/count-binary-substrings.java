@@ -9,7 +9,7 @@ class Solution {
         int index=0;
         int n = s.length();
         while(index<n){
-            /* This is the number of simialr consecutive chars either '1'/'0' of current group
+            /* This is the number of similar consecutive chars either '1'/'0' of current group
              * We set it to one because we have already started the current group by parsing
              * the current char*/
             int currCount =1;
