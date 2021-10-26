@@ -1,3 +1,6 @@
+//T:O(n)
+//S:O(k)
+
 class Solution {
   public boolean containsNearbyDuplicate(int[] nums, int k) {
     Set<Integer> seen = new HashSet<>();
