@@ -1,3 +1,5 @@
+//T:O(Nlogk)
+//S:O(k)
 class Solution {
     public int findKthLargest(int[] nums, int k) {
         PriorityQueue<Integer> minheap = new PriorityQueue<Integer>((a,b)->a-b);
