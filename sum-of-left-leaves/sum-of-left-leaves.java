@@ -11,6 +11,7 @@ class Solution {
             for(int i=0; i<size; i++){
                 TreeNode node = q.poll();
                 if(node.left!=null){
+                    //if left node is the leaf node
                     if(node.left.left==null && node.left.right==null){
                         res+=node.left.val;
                     }
