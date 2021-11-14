@@ -15,51 +15,26 @@
  */
 class Solution {
     public List<List<Integer>> findLeaves(TreeNode root) {
-        List<List<Integer>> leafLists = new ArrayList<>();
-        if (root == null) {
-            return leafLists;
+        HashMap<Integer, List<Integer>> res = new HashMap<>();
+        helper(root, res);
+        List<List<Integer>> answer = new ArrayList<>();
+        //Transform the map into the answer
+        for(int key: res.keySet()){
+            answer.add(res.get(key));
         }
-
-        List<Integer> rootAsLeafList = new ArrayList<>();
-        while ((root.left != null) || (root.right != null)) {
-            leafLists.add(this.removeAndCollectLeaves(root));
-        }
-        rootAsLeafList.add(root.val);
-        root = null;
-        leafLists.add(rootAsLeafList);
-        return leafLists;
+        return answer;
     }
-
-    private List<Integer> removeAndCollectLeaves(TreeNode root) {
-        List<Integer> leafValues = new ArrayList<>();
-        Deque<TreeNode> nodeQ = new LinkedList<>();
-        nodeQ.addLast(root);
-        while (nodeQ.peekFirst() != null) {
-            TreeNode currentNode = nodeQ.pollFirst();
-            TreeNode leftChild = currentNode.left;
-            TreeNode rightChild = currentNode.right;
-
-            if (leftChild != null) {
-                if (this.isLeafNode(leftChild)) {
-                    leafValues.add(leftChild.val);
-                    currentNode.left = null;
-                } else {
-                    nodeQ.add(leftChild);
-                }
-            }
-            if (rightChild != null) {
-                if (this.isLeafNode(rightChild)) {
-                    leafValues.add(rightChild.val);
-                    currentNode.right = null;
-                } else {
-                    nodeQ.add(rightChild);
-                }
-            }
+    
+    private int helper(TreeNode root,  HashMap<Integer, List<Integer>> res){
+        if(root==null){
+            return -1;
         }
-        return leafValues;
-    }
-
-    boolean isLeafNode(TreeNode node) {
-        return (node.left == null) && (node.right == null);
+        
+        int height = 1+Math.max(helper(root.left, res), helper(root.right, res));
+        if(height>=0){
+            res.put(height, res.getOrDefault(height, new ArrayList<>()));
+            res.get(height).add(root.val);
+        }
+        return height;
     }
 }
