@@ -1,5 +1,5 @@
-//T:O(N^k*k*logN)
-//S:O(N)
+//T:O(E+VlogV)
+//S:O(V)
 
 class City {
     int id;
