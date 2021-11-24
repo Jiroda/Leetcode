@@ -23,26 +23,23 @@ class Node {
 
 class Solution {
     public Node connect(Node root) {
-        //Base case
-        if(root == null) return root;
-        // using 3 node pointers just to clearly explain the flow
-        Node curr = root;
-        Node prev;
-        Node nextLevel;
-        while(curr != null){
-            nextLevel = curr.left;
-            prev = null;
-            while(curr != null){
-                if(prev != null) {
-                    prev.next = curr.left;
+        if(root==null) return root;
+        LinkedList<Node> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i=0; i<size; i++){
+                Node curr = queue.poll();
+                if(i<size-1){
+                    curr.next = queue.peek();
                 }
-                if(curr.left != null){
-                    curr.left.next = curr.right;
+                if(curr.left!=null){
+                    queue.offer(curr.left);
                 }
-                prev = curr.right;
-                curr = curr.next;
+                if(curr.right!=null){
+                    queue.offer(curr.right);
+                }
             }
-            curr = nextLevel;
         }
         return root;
     }
