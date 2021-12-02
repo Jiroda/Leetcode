@@ -40,28 +40,27 @@ class Node {
 
 class Solution {
     public Node construct(int[][] grid) {
-        return helper(grid, 0, 0, grid.length);
+        return recursiveHelper(grid, 0, 0, grid.length);
     }
-    private Node helper(int[][] grid, int x, int y, int length){
-        Node node = new Node(grid[x][y]!=0, true, null, null,null,null);
-        
+    
+    public Node recursiveHelper(int[][] grid, int row, int col, int length){
         if(length==1){
-            return node;
+            //we have a leaf
+            return new Node(grid[row][col]!=0, true, null, null, null, null);
         }
         
-        Node topLeft = helper(grid, x, y, length/2);
-        Node topRight = helper(grid, x, y+length/2, length/2);
-        Node bottomLeft = helper(grid, x+length/2, y, length/2);
-        Node bottomRight = helper(grid, x+length/2, y+length/2, length/2);
+        Node topLeft = recursiveHelper(grid, row, col, length/2);
+        Node topRight = recursiveHelper(grid, row, col+length/2, length/2);
+        Node bottomLeft = recursiveHelper(grid, row+length/2, col, length/2);
+        Node bottomRight = recursiveHelper(grid, row+length/2, col+length/2, length/2);
         
-        if(!topLeft.isLeaf || !topRight.isLeaf || !bottomLeft.isLeaf || !bottomRight.isLeaf || topLeft.val!=topRight.val || topRight.val!=bottomLeft.val || bottomLeft.val!=bottomRight.val){
-            node.isLeaf = false;
-            node.topLeft = topLeft;
-            node.topRight = topRight;
-            node.bottomLeft = bottomLeft;
-            node.bottomRight = bottomRight;
+        //All the 4 nodes are leaves and they have the same value, then we merge all of them into one single node and return
+        if(topLeft.isLeaf && topRight.isLeaf && bottomLeft.isLeaf && bottomRight.isLeaf
+           && topLeft.val == topRight.val && topRight.val == bottomLeft.val && bottomLeft.val == bottomRight.val){
+               return new Node(topLeft.val, true, null, null, null, null);
+        }else{
+            //If the current grid has different values, set isLeaf to False and set val to *any value* and divide the current grid into four sub-grids as shown in the photo.
+            return new Node(true, false, topLeft, topRight, bottomLeft, bottomRight);
         }
-        
-        return node;
     }
 }
