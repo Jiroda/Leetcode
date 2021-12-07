@@ -40,27 +40,24 @@ class Node {
 
 class Solution {
     public Node construct(int[][] grid) {
-        return recursiveHelper(grid, 0, 0, grid.length);
+        return helper(grid, grid.length, 0, 0);
     }
     
-    public Node recursiveHelper(int[][] grid, int row, int col, int length){
-        if(length==1){
-            //we have a leaf
+    private Node helper(int[][] grid, int size, int row, int col){
+        if(size==1){
             return new Node(grid[row][col]!=0, true, null, null, null, null);
         }
         
-        Node topLeft = recursiveHelper(grid, row, col, length/2);
-        Node topRight = recursiveHelper(grid, row, col+length/2, length/2);
-        Node bottomLeft = recursiveHelper(grid, row+length/2, col, length/2);
-        Node bottomRight = recursiveHelper(grid, row+length/2, col+length/2, length/2);
+        Node topLeft = helper(grid, size/2, row, col);
+        Node topRight = helper(grid, size/2, row, col+size/2);
+        Node bottomLeft = helper(grid, size/2, row+size/2, col);
+        Node bottomRight = helper(grid, size/2, row+size/2, col+size/2);
         
-        //All the 4 nodes are leaves and they have the same value, then we merge all of them into one single node and return
-        if(topLeft.isLeaf && topRight.isLeaf && bottomLeft.isLeaf && bottomRight.isLeaf
-           && topLeft.val == topRight.val && topRight.val == bottomLeft.val && bottomLeft.val == bottomRight.val){
-               return new Node(topLeft.val, true, null, null, null, null);
-        }else{
-            //If the current grid has different values, set isLeaf to False and set val to *any value* and divide the current grid into four sub-grids as shown in the photo.
-            return new Node(true, false, topLeft, topRight, bottomLeft, bottomRight);
+        if(!topLeft.isLeaf || !topRight.isLeaf || !bottomLeft.isLeaf || !bottomRight.isLeaf || topLeft.val !=topRight.val || topRight.val !=bottomLeft.val || bottomLeft.val !=bottomRight.val){
+            return new Node(topLeft.val, false, topLeft, topRight, bottomLeft, bottomRight);
         }
+        
+        return new Node(grid[row][col]!=0, true, null, null, null, null);
+        
     }
 }
