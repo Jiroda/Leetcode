@@ -1,32 +1,59 @@
 class Solution {
+    int[][] dirs = new int[][]{{-1,0},{0,1},{1,0},{0,-1}};
     public boolean exist(char[][] board, String word) {
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
-                if (dfs(board, word, 0, i, j, new boolean[board.length][board[0].length])) {
-                    return true;
+        if(board==null || board.length==0 || board[0].length==0){
+            return false;
+        }
+        int m = board.length;
+        int n = board[0].length;
+        for(int i=0; i<m; i++){
+            for(int j=0; j<n; j++){
+                if(board[i][j]==word.charAt(0)){
+                    boolean flag = dfs(board, word, i, j, 0, new boolean[m][n]);
+                    if(flag){
+                        return true;
+                    }
                 }
             }
         }
         return false;
     }
     
-    private boolean dfs(char[][] board, String word, int word_i, int i, int j, boolean[][] visited) {
-        if (word_i == word.length()) {
+    private boolean dfs(char[][] board, String word, int row, int col, int pointer, boolean[][] visited){
+        //we have successfully found the word
+        if(pointer==word.length()){
             return true;
         }
-        if (i < 0 || j < 0 || i >= board.length || j >= board[i].length || visited[i][j]) {
+        
+        //out of boundary
+        if(row<0 || row>=board.length || col<0 || col>=board[0].length){
             return false;
         }
-        if (word.charAt(word_i) != board[i][j]) {
+        
+        //If already visited
+        if(visited[row][col]){
             return false;
         }
-        visited[i][j] = true;
-        boolean existed = 
-            dfs(board, word, word_i + 1, i + 1, j, visited) ||
-            dfs(board, word, word_i + 1, i - 1, j, visited) ||
-            dfs(board, word, word_i + 1, i, j + 1, visited) ||
-            dfs(board, word, word_i + 1, i, j - 1, visited);
-        visited[i][j] = false;
-        return existed;
+        
+        //character at current position does not match the index of the word
+        if(board[row][col]!=word.charAt(pointer)){
+            return false;
+        }
+        
+        
+        visited[row][col] = true;
+        
+        for(int[] dir: dirs){
+            int newRow = row+dir[0];
+            int newCol = col+dir[1];
+            boolean found = dfs(board, word, newRow, newCol, pointer+1, visited);
+            if(found){
+                return true;
+            }
+        }
+        
+        visited[row][col] = false;
+        
+        return false;
     }
 }
