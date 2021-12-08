@@ -1,5 +1,5 @@
-//T:O(log(n-k)+k)
-//S:O(1)
+// T:O(log(n-k)+k)
+// S:O(1)
 
 class Solution {
     public List<Integer> findClosestElements(int[] arr, int k, int x) {
@@ -20,8 +20,6 @@ class Solution {
         
         left = (pos - k < 0) ? 0 : pos - k;
         right = (pos + k >= n) ? n - 1 : pos + k;
-
-        
         while(right - left + 1 != k) {
             if(Math.abs(arr[left] - x) > Math.abs(arr[right] - x)) {
                 left++;
