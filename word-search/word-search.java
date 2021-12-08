@@ -1,3 +1,6 @@
+//T:O(m*n*4^lengthOfWord)
+//S:O(length of word)
+
 class Solution {
     int[][] dirs = new int[][]{{-1,0},{0,1},{1,0},{0,-1}};
     public boolean exist(char[][] board, String word) {
@@ -52,7 +55,7 @@ class Solution {
             }
         }
         
-        visited[row][col] = false;
+        visited[row][col] = false;//We have to set the visited row to false, as it may be used for another path check
         
         return false;
     }
