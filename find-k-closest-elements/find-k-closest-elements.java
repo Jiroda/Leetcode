@@ -7,13 +7,13 @@ class Solution {
         int left = 0;
         int right = n - 1;
         int pos = 0;
+        
         while(left <= right) {
             int m = left + (right - left) / 2;
             if(arr[m] <= x) {
                 pos = m;
                 left = m + 1;
-            }
-            else {
+            }else {
                 right = m - 1;
             }
         }
