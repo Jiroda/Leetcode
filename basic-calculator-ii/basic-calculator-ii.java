@@ -18,7 +18,9 @@ class Solution {
             if(Character.isDigit(ch)){
                 temp = temp*10 + ch-'0';
             }else if(ch!=' '){
+                //process the numerical value in temp with the operator val and move that into the num variable
                 num = calculate(op, num, temp);
+                //only if we have a + or - we move the number found so far and add it to the result
                 if(ch=='+' || ch=='-'){
                     result+=num;
                     num=0;
