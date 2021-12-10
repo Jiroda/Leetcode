@@ -1,3 +1,5 @@
+//T:O(m*n* 4^ wordLength) m and n are the matrix rows and cols
+//S:O(N) N->total number of letters in the dictionary
 class Solution {
     int[][] directions = new int[][]{{1,0},{0,1},{-1,0},{0,-1}};
     public List<String> findWords(char[][] board, String[] words) {
