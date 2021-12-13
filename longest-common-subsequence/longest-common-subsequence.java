@@ -1,20 +1,28 @@
+//Space optimized
+//T:O(m*n) where m->length pf text1, n-> length of text2
+//S:O(min(m,n))
 class Solution {
     public int longestCommonSubsequence(String text1, String text2) {
-        int[][] dp = new int[text1.length()+1][text2.length()+1];
-        int ans =0;
-        
-        for(int i=1; i<=text1.length(); i++){
-            for(int j=1; j<=text2.length(); j++){
-                if(text1.charAt(i-1)==text2.charAt(j-1)){
-                    dp[i][j] = 1+dp[i-1][j-1];
-                }else{
-                    dp[i][j] = Math.max(dp[i-1][j], dp[i][j-1]);
-                }
-                
-                ans = Math.max(ans, dp[i][j]);
-            }
+        //find the smallest of the 2 strings if so swap
+        if(text1.length()>text2.length()){
+            String temp = text2;
+            text2 = text1;
+            text1 = temp;
         }
         
-        return ans;
+        int[] previousRow = new int[text1.length()+1];
+        for(int row=1; row<=text2.length(); row++){
+            int[] currentRow = new int[text1.length()+1];
+            for(int col=1; col<=text1.length(); col++){
+                if(text2.charAt(row-1)==text1.charAt(col-1)){
+                    currentRow[col] = 1+previousRow[col-1];
+                }else{
+                    currentRow[col] = Math.max(previousRow[col], currentRow[col-1]);
+                }
+            }
+            previousRow = currentRow;
+        }
+        
+        return previousRow[text1.length()];
     }
 }
