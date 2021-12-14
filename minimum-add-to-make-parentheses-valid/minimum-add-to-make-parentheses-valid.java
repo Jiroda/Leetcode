@@ -1,17 +1,20 @@
+//T:O(n)
+//S:O(1)
 class Solution {
     public int minAddToMakeValid(String s) {
-        Stack<Character> stack = new Stack<>();
+        int left =0;
+        int right =0;
         for(char c: s.toCharArray()){
             if(c=='('){
-                stack.push(c);
+                right++;
             }else if(c==')'){
-                if(!stack.isEmpty() && stack.peek()=='('){
-                    stack.pop();
+                if(right>0){
+                    right--;
                 }else{
-                    stack.push(c);
+                    left++;
                 }
             }
         }
-        return stack.size();
+        return left+right;
     }
 }
